@@ -13,20 +13,25 @@ b = (0, 255, 255)
 y = (255, 255, 0)
 
 menu = [
-  ("Clock",       b, "/usr/bin/python", "clock.py"),
-  ("Text",        b, "/usr/bin/python", "examples/text_scroll.py"),
-  ("Colour",      b, "/usr/bin/python", "examples/colour_cycle.py"),
-#  ("Match Color", b, "/usr/bin/python", "examples/colour_match.py"),
-  ("Conway",      g, "/usr/bin/python", "examples/conway.py"),
-  ("Dice",        g, "/usr/bin/python", "dice.py"),
-  ("Ball",        y, "/usr/bin/python", "gravity_ball.py"),
-  ("Maze",        y, "/usr/bin/python", "marble-maze.py"),
-  ("Sparkles",    b, "/usr/bin/python", "examples/random_sparkles.py"),
-  ("Rainbow",     b, "/usr/bin/python", "examples/rainbow.py"),
+  ("Clock",       b, "/usr/bin/python", "clock/clock.py"),
+  ("Colour",      b, "/usr/bin/python", "sensehat/colour_cycle.py"),
+
+  ("Maze",        y, "/usr/bin/python", "marble-maze/marble-maze.py"),
+  ("Dice",        g, "/usr/bin/python", "dice/dice.py"),
+  ("Ball",        y, "/usr/bin/python", "gravity/gravity_ball.py"),
+
+  ("Rainbow",     b, "/usr/bin/python", "sensehat/rainbow.py"),
+
+  ("Conway",      g, "/usr/bin/python", "sensehat2/conway.py"),
+  ("Sparkles",    b, "/usr/bin/python", "sensehat2/random_sparkles.py"),
+  ("Temp",        b, "/usr/bin/python", "sensehat2/temperature.py"),
+  ("Humidity",    b, "/usr/bin/python", "sensehat2/humidity.py"),
+
+  ("Text",        b, "/usr/bin/python", "sensehat/text_scroll.py"),
+
 #  ("Egg",         g, "/usr/bin/python", "egg/eggdrop.py"),
-  ("Compass",     b, "/usr/bin/python", "examples/compass.py"),
-  ("Temp",        b, "/usr/bin/python", "examples/temperature.py"),
-  ("Humidity",    b, "/usr/bin/python", "examples/humidity.py"),
+#  ("Compass",     b, "/usr/bin/python", "examples/compass.py"),
+
   ("IPAddr",      r, "/usr/bin/python", "ipaddr/displayip.py"),
   ("Poweroff",    r, "poweroff", "")
 ]
