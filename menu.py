@@ -5,7 +5,7 @@ import time
 import RPi.GPIO as GPIO
 import subprocess
 
-homedir = "/home/pi/senseHat/"
+homedir = "/home/pi/astropi/"
 
 r = (255, 0, 0)
 g = (0, 255, 0)
