@@ -5,9 +5,6 @@ import time
 import RPi.GPIO as GPIO
 import subprocess
 
-##### joystick libraries #####
-from sense_hat import SenseHat, ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
-
 homedir = "/home/pi/astropi/"
 
 r = (255, 0, 0)
@@ -39,7 +36,6 @@ menu = [
   ("Poweroff",    r, "poweroff", "")
 ]
 
-current = 0
 current_proc =  None
 
 GPIO.setmode(GPIO.BCM)
@@ -50,70 +46,15 @@ GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_UP) #RIGHT
 GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP) #2LEFT
 GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP) #2RIGHT
 
-last_LR = 0
+time.sleep(1)
 
-def go_up():
-    global current
-    global last_LR
-    last_LR = 0
-    current = current-1
-    if current<0:
-        current = len(menu)-1
-    print_menu(current)
-
-def go_down():
-    global current
-    global last_LR
-    last_LR = 0
-    current=current+1
-    if current>len(menu)-1:
-        current = 0
-    print_menu(current)
-
-def go_left():
-    global last_LR
-    last_LR = 1
-
-def go_right():
-    global last_LR
-    if last_LR == 2:
-        stop_process()
-        last_LR = 0
-    else:
-        last_LR = 2
-
-def go_click():
-    global current
-    run_process(current)
-
-
-def pushed_down(event):
-    if event.action != ACTION_RELEASED:
-        print ("Joystick DOWN")
-        go_down()
-
-def pushed_up(event):
-    if event.action != ACTION_RELEASED:
-        print ("Joystick UP")
-        go_up()
-
-def pushed_left(event):
-    if event.action != ACTION_RELEASED:
-        print ("Joystick LEFT")
-        go_left()
-
-def pushed_right(event):
-    if event.action != ACTION_RELEASED:
-        print ("Joystick RIGHT")
-        go_right()
-
-def pushed_click(event):
-    if event.action != ACTION_RELEASED:
-        print ("Joystick CLICK")
-        go_click()
+sense = SenseHat()
+sense.clear()  # Blank the LED matrix
+sense.set_rotation(270)  # Flight orientation
 
 def print_menu(choice):
     sense.show_message(menu[choice][0], scroll_speed=0.05, text_colour=menu[choice][1])
+
 
 def run_process(choice):
     global current_proc
@@ -144,35 +85,26 @@ def stop_process():
 
     print_menu(current)
 
-
-#############  Start of main program
-time.sleep(1)
-
-sense = SenseHat()
-sense.clear()  # Blank the LED matrix
-sense.set_rotation(270)  # Flight orientation
-
-##### Make Joystick Available #####
-sense.stick.direction_up = pushed_up
-sense.stick.direction_down = pushed_down
-sense.stick.direction_left = pushed_left
-sense.stick.direction_right = pushed_right
-sense.stick.direction_middle = pushed_click
-
-
 running = True
 
+current = 0
 print_menu(current)
 
 
 while running:
     if GPIO.input(26) == 0:
         print ("button 26 - UP")
-        go_up()
+        current = current-1
+        if current<0:
+            current = len(menu)-1
+        print_menu(current)
 
     if GPIO.input(13) == 0:
         print ("button 13 - DOWN")
-        go_down()
+        current=current+1
+        if current>len(menu)-1:
+            current = 0
+        print_menu(current)
 
     if GPIO.input(19) == 0:
         print ("button 19")
