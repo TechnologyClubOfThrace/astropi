@@ -16,6 +16,7 @@ b = (0, 255, 255)
 y = (255, 255, 0)
 
 menu = [
+  ("Demo",        g, "/usr/bin/python", "demo/demo.py"),
   ("Clock",       b, "/usr/bin/python", "clock/clock.py"),
   ("Colour",      b, "/usr/bin/python", "sensehat/colour_cycle.py"),
 
